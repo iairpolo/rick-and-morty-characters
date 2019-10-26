@@ -59,9 +59,7 @@ const Character = ({ match }) => {
         <p>Episodes:</p>
         {character.episode.map(episode => {
           const episodeId = episode.split('episode/')[1];
-          console.log(episodeId);
           const episodeRender = episodes[episodeId - 1];
-          console.log(episodeRender);
           return (
             <p key={episodeId}>
               {episodeRender.episode}: {episodeRender.name}
