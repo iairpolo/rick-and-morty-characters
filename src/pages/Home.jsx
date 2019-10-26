@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import CharactersList from '../components/CharactersList';
+import './styles/Home.css';
 
 const Home = () => {
   const [data, setData] = useState({
+    info: { next: '' },
     results: []
   });
   const [error, setError] = useState(null);
@@ -13,7 +15,7 @@ const Home = () => {
   const API = 'https://rickandmortyapi.com/api/character/';
 
   const fetchCharacters = (url, search = false) => {
-    setLoading(true);
+    if (search) setLoading(true);
     fetch(url)
       .then(response => response.json())
       .then(response => {
@@ -51,13 +53,21 @@ const Home = () => {
 
   return (
     <main className='Main'>
-      <SearchForm onSubmit={handleSubmit} onChange={handleChange} />
+      <SearchForm
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        value={search}
+      />
       <CharactersList
         loading={loading}
         error={error}
         characters={data.results}
       />
-      {!loading && <button onClick={handleClick}>Next characters</button>}
+      {!loading && data.info.next && (
+        <button className='Main__MoreButton' onClick={handleClick}>
+          More characters
+        </button>
+      )}
     </main>
   );
 };

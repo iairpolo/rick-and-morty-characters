@@ -1,9 +1,12 @@
 import React from 'react';
 import CharacterItem from './CharacterItem';
+import Loader from './Loader';
+
+import './styles/CharactersList.css';
 
 const CharactersList = ({ characters = [], loading, error }) => {
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return <Loader />;
   } else if (error) {
     return (
       <section className='ErrorPage'>

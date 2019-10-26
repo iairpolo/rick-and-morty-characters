@@ -1,0 +1,8 @@
+.CharactersList ul {
+  margin: 0 20px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
