@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const SearchForm = () => {
-  const handleSubmit = () => {};
-
+const SearchForm = ({ onSubmit, onChange }) => {
   return (
-    <form action='submit'>
-      <input placeholder='What character are you looking for?' />
-      <button onSubmit={handleSubmit}>Search</button>
+    <form action='submit' onSubmit={onSubmit}>
+      <input
+        onChange={onChange}
+        placeholder='What character are you looking for?'
+      />
+      <button type='submit'>Search</button>
     </form>
   );
 };

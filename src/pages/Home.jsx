@@ -8,10 +8,12 @@ const Home = () => {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   const API = 'https://rickandmortyapi.com/api/character/';
 
   const fetchCharacters = (url, search = false) => {
+    setLoading(true);
     fetch(url)
       .then(response => response.json())
       .then(response => {
@@ -38,9 +40,18 @@ const Home = () => {
     fetchCharacters(data.info.next);
   };
 
+  const handleChange = event => {
+    setSearch(event.target.value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    fetchCharacters(`${API}?name=${search}`, true);
+  };
+
   return (
     <main className='Main'>
-      <SearchForm />
+      <SearchForm onSubmit={handleSubmit} onChange={handleChange} />
       <CharactersList
         loading={loading}
         error={error}
