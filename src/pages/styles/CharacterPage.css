@@ -3,3 +3,15 @@
   text-align: center;
   min-height: 50vh;
 }
+
+@media screen and (max-width: 1000px) {
+  .Character {
+    padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Character {
+    padding: 0 20px;
+  }
+}

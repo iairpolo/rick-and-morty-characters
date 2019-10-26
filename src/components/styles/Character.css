@@ -23,3 +23,13 @@
 .Character__Description p {
   margin-top: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .Character__Container {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'title' 'image' 'description';
+  }
+  .Character__Description {
+    margin-top: 20px;
+  }
+}
