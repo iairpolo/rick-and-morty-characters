@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import CharactersList from '../components/CharactersList';
-import Error from './Error';
 import './styles/Home.css';
 
 const Home = ({ history }) => {
@@ -55,7 +54,8 @@ const Home = ({ history }) => {
   };
 
   if (data.error) {
-    return <Error error={data.error} />;
+    history.replace('/error');
+    setData({ error: '' });
   }
   return (
     <main className='Main'>
