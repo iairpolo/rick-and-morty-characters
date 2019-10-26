@@ -6,14 +6,15 @@ import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Character from '../pages/Character';
+import CharacterPage from '../pages/CharacterPage';
 
 const App = () => (
   <BrowserRouter>
     <Header />
     <Switch>
       <Route exact path='/' component={Home} />
-      <Route exact path='/character/:characterId' component={Character} />
+      <Route exact path='/search=:q' component={Home} />
+      <Route exact path='/character/:characterId' component={CharacterPage} />
       <Route component={NotFound} />
     </Switch>
     <Footer />

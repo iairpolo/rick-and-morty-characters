@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import './styles/CharacterPage.css';
 import Loader from '../components/Loader';
+import Error from './Error';
+import Character from '../components/Character';
 
-const Character = ({ match }) => {
+const CharacterPage = ({ match }) => {
   const {
     params: { characterId }
   } = match;
@@ -24,8 +27,8 @@ const Character = ({ match }) => {
 
         const episodes2Req = await fetch(`${API}episode/?page=2`);
         const episodes2Data = await episodes2Req.json();
-
         setEpisodes(episodes1Data.results.concat(episodes2Data.results));
+
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -37,38 +40,16 @@ const Character = ({ match }) => {
   }, []);
 
   if (loading) {
-    return <Loader />;
-  } else if (error) {
-    return (
-      <section className='ErrorPage'>
-        <h2>Looks like we have a problem</h2>
-        <p>{error}</p>
-      </section>
-    );
-  } else {
     return (
       <section className='Character'>
-        <h1>{character.name}</h1>
-        <img src={character.image} alt={character.name} />
-        <p>Status: {character.status}</p>
-        <p>Species: {character.species}</p>
-        <p>Type/Subspecies: {character.type}</p>
-        <p>Gender: {character.gender}</p>
-        <p>Origin: {character.origin.name}</p>
-        <p>Location: {character.location.name}</p>
-        <p>Episodes:</p>
-        {character.episode.map(episode => {
-          const episodeId = episode.split('episode/')[1];
-          const episodeRender = episodes[episodeId - 1];
-          return (
-            <p key={episodeId}>
-              {episodeRender.episode}: {episodeRender.name}
-            </p>
-          );
-        })}
+        <Loader />
       </section>
     );
+  } else if (error) {
+    return <Error />;
+  } else {
+    return <Character character={character} episodes={episodes} />;
   }
 };
 
-export default Character;
+export default CharacterPage;

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import CharactersList from '../components/CharactersList';
+import Error from './Error';
 import './styles/Home.css';
 
-const Home = () => {
+const Home = ({ history }) => {
   const [data, setData] = useState({
     info: { next: '' },
-    results: []
+    results: [],
+    error: ''
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,6 @@ const Home = () => {
               info: response.info,
               results: data.results.concat(response.results)
             });
-        // if (response.error) setError(response.error);
         setLoading(false);
       })
       .catch(err => {
@@ -50,8 +51,12 @@ const Home = () => {
   const handleSubmit = event => {
     event.preventDefault();
     fetchCharacters(`${API}?name=${search}`, true);
+    history.push(`/search=${search}`);
   };
 
+  if (data.error) {
+    return <Error error={data.error} />;
+  }
   return (
     <main className='Main'>
       <SearchForm
@@ -59,11 +64,13 @@ const Home = () => {
         onChange={handleChange}
         value={search}
       />
+
       <CharactersList
         loading={loading}
         error={error}
         characters={data.results}
       />
+
       {!loading && data.info.next && (
         <button className='Main__MoreButton' onClick={handleClick}>
           More characters

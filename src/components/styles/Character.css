@@ -1,0 +1,25 @@
+.Character__Container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  column-gap: 40px;
+  grid-template-areas: 'title title' 'image description';
+  text-align: left;
+}
+
+.Character__Title {
+  grid-area: title;
+}
+
+.Character__Image {
+  grid-area: image;
+}
+
+.Character__Description {
+  grid-area: description;
+  display: grid;
+  grid-template-columns: 140px auto;
+}
+
+.Character__Description p {
+  margin-top: 0;
+}

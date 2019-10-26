@@ -26,6 +26,15 @@
   opacity: 1;
 }
 
+@media screen and (max-width: 955px) {
+  .CharacterItem {
+    width: 33.3%;
+  }
+  .CharacterItem img {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .CharacterItem {
     width: 50%;

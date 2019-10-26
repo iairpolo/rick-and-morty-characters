@@ -1,11 +1,14 @@
 import React from 'react';
 import ImgNotFound from '../assets/images/404-image.png';
+import './styles/NotFound.css';
 
 const NotFound = () => (
-  <section>
+  <section className='NotFound'>
     <img src={ImgNotFound} alt='' />
-    <h1>404</h1>
-    <h3>Not Found</h3>
+    <div>
+      <h1>404</h1>
+      <h3>Not Found</h3>
+    </div>
   </section>
 );
 
