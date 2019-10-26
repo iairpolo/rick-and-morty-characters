@@ -15,3 +15,9 @@
   width: 25%;
   cursor: pointer;
 }
+
+@media screen and (max-width: 700px) {
+  .Main__MoreButton {
+    width: 50%;
+  }
+}

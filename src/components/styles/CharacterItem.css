@@ -13,8 +13,30 @@
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 .CharacterItem__Name {
-  margin: 10px;
+  margin: 15px;
+}
+
+.CharacterItem:hover .CharacterItem__Back {
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .CharacterItem {
+    width: 50%;
+  }
+  .CharacterItem__Back {
+    transition: none;
+    opacity: 1;
+  }
+  .CharacterItem img {
+    width: 100%;
+  }
+  .CharacterItem__Name {
+    margin: 10px;
+  }
 }

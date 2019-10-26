@@ -1,3 +1,11 @@
 .Footer {
   text-align: center;
 }
+
+.Footer a {
+  color: white;
+}
+
+.Footer a:hover {
+  text-decoration: none;
+}
