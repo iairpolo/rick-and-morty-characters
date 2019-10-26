@@ -25,7 +25,7 @@ const Home = () => {
               info: response.info,
               results: data.results.concat(response.results)
             });
-        if (response.error) setError(response.error);
+        // if (response.error) setError(response.error);
         setLoading(false);
       })
       .catch(err => {
@@ -36,6 +36,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchCharacters(API);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = () => {

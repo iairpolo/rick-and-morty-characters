@@ -19,6 +19,7 @@
 
 .CharacterItem__Name {
   margin: 15px;
+  color: white;
 }
 
 .CharacterItem:hover .CharacterItem__Back {
