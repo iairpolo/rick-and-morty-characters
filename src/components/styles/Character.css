@@ -4,14 +4,23 @@
   column-gap: 40px;
   grid-template-areas: 'title title' 'image description';
   text-align: left;
+  position: relative;
 }
 
 .Character__Title {
   grid-area: title;
 }
 
+.Character__BackButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .Character__Image {
   grid-area: image;
+  max-width: 300px;
+  width: 100%;
 }
 
 .Character__Description {
@@ -29,7 +38,18 @@
     grid-template-columns: 1fr;
     grid-template-areas: 'title' 'image' 'description';
   }
+
+  .Character__Image {
+    justify-self: center;
+  }
+
   .Character__Description {
     margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .Character__BackButton {
+    width: 65px;
   }
 }

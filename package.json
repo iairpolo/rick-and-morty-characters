@@ -1,6 +1,7 @@
 {
   "name": "rick-and-morty-characters",
-  "version": "0.1.0",
+  "author": "Iair Poloniecki <iairpoloniecki@tuta.io> (https://github.com/iairpolo/)",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react": "^16.11.0",

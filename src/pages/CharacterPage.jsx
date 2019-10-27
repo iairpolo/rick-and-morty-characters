@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 import Error from './Error';
 import Character from '../components/Character';
 
-const CharacterPage = ({ match }) => {
+const CharacterPage = ({ match, history }) => {
   const {
     params: { characterId }
   } = match;
@@ -39,6 +39,10 @@ const CharacterPage = ({ match }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleReload = () => {
+    history.push('/');
+  };
+
   if (loading) {
     return (
       <section className='Character'>
@@ -46,7 +50,7 @@ const CharacterPage = ({ match }) => {
       </section>
     );
   } else if (error) {
-    return <Error />;
+    return <Error error={error} reload={handleReload} />;
   } else {
     return <Character character={character} episodes={episodes} />;
   }

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import CharactersList from '../components/CharactersList';
 import './styles/Home.css';
+import Error from './Error';
 
-const Home = ({ history }) => {
+const Home = () => {
   const [data, setData] = useState({
     info: { next: '' },
     results: [],
@@ -20,12 +21,18 @@ const Home = ({ history }) => {
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        search
-          ? setData(response)
-          : setData({
-              info: response.info,
-              results: data.results.concat(response.results)
-            });
+        if (search) {
+          if (!response.error) {
+            setData(response);
+          } else {
+            setData({ info: { next: '' }, results: [], error: response.error });
+          }
+        } else {
+          setData({
+            info: response.info,
+            results: data.results.concat(response.results)
+          });
+        }
         setLoading(false);
       })
       .catch(err => {
@@ -50,12 +57,16 @@ const Home = ({ history }) => {
   const handleSubmit = event => {
     event.preventDefault();
     fetchCharacters(`${API}?name=${search}`, true);
-    history.push(`/search=${search}`);
   };
 
-  if (data.error) {
-    history.replace('/error');
-    setData({ error: '' });
+  const handleReload = () => {
+    setError(null);
+    setLoading(true);
+    fetchCharacters(API);
+  };
+
+  if (error) {
+    return <Error error={error} reload={handleReload} />;
   }
   return (
     <main className='Main'>
@@ -63,11 +74,12 @@ const Home = ({ history }) => {
         onSubmit={handleSubmit}
         onChange={handleChange}
         value={search}
+        reload={handleReload}
       />
 
       <CharactersList
         loading={loading}
-        error={error}
+        searchError={data.error}
         characters={data.results}
       />
 

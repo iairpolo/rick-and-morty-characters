@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles/Character.css';
+import back from '../assets/images/icons8-back.png';
 
 const Character = ({ character, episodes }) => (
   <section className='Character'>
     <div className='Character__Container'>
       <h1 className='Character__Title'>{character.name}</h1>
+      <Link to='/'>
+        <img className='Character__BackButton' src={back} alt='Go back' />
+      </Link>
       <img
         className='Character__Image'
         src={character.image}
