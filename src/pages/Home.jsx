@@ -5,11 +5,12 @@ import './styles/Home.css';
 import Error from './Error';
 
 const Home = () => {
-  const [data, setData] = useState({
+  const INITIAL_STATE = {
     info: { next: '' },
     results: [],
     error: ''
-  });
+  };
+  const [data, setData] = useState(INITIAL_STATE);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -60,6 +61,8 @@ const Home = () => {
   };
 
   const handleReload = () => {
+    setData(INITIAL_STATE);
+    setSearch('');
     setError(null);
     setLoading(true);
     fetchCharacters(API);

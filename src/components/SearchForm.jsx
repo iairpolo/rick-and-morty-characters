@@ -9,7 +9,7 @@ const SearchForm = ({ onSubmit, onChange, value, reload }) => (
       value={value}
       placeholder='Search character...'
     />
-    <button className='SearchForm__CancelButton' onClick={reload}>
+    <button className='SearchForm__CancelButton' onClick={reload} type='button'>
       X
     </button>
     <button className='SearchForm__Button' type='submit'>
