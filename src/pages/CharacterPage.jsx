@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import './styles/CharacterPage.css';
 import Loader from '../components/Loader';
 import Error from './Error';
 import Character from '../components/Character';
 
-const CharacterPage = ({ match, history }) => {
-  const {
-    params: { characterId }
-  } = match;
+const CharacterPage = () => {
+  let history = useHistory();
+  let { characterId } = useParams();
   const [character, setCharacter] = useState({});
   const [episodes, setEpisodes] = useState([]);
   const [error, setError] = useState(null);

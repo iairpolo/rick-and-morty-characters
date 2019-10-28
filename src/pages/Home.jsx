@@ -10,21 +10,22 @@ const Home = () => {
     results: [],
     error: ''
   };
+  const API = 'https://rickandmortyapi.com/api/character/';
   const [data, setData] = useState(INITIAL_STATE);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [url, setUrl] = useState(API);
+  const [query, setQuery] = useState('');
+  const [searching, setSearching] = useState(false);
 
-  const API = 'https://rickandmortyapi.com/api/character/';
-
-  const fetchCharacters = (url, search = false) => {
-    if (search) setLoading(true);
+  const fetchCharacters = url => {
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        if (search) {
+        if (searching) {
           if (!response.error) {
             setData(response);
+            setSearching(false);
           } else {
             setData({ info: { next: '' }, results: [], error: response.error });
           }
@@ -43,29 +44,35 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchCharacters(API);
+    fetchCharacters(url);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
-  const handleClick = () => {
-    fetchCharacters(data.info.next);
+  const handleMore = () => {
+    setUrl(data.info.next);
   };
 
   const handleChange = event => {
-    setSearch(event.target.value);
+    setQuery(event.target.value);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    fetchCharacters(`${API}?name=${search}`, true);
+    setSearching(true);
+    setLoading(true);
+    setUrl(`${API}?name=${query}`);
+  };
+
+  const handleRemoveSearch = () => {
+    setLoading(true);
+    setData(INITIAL_STATE);
+    setQuery('');
+    setUrl(API);
   };
 
   const handleReload = () => {
-    setData(INITIAL_STATE);
-    setSearch('');
     setError(null);
-    setLoading(true);
-    fetchCharacters(API);
+    setUrl(API);
   };
 
   if (error) {
@@ -76,8 +83,8 @@ const Home = () => {
       <SearchForm
         onSubmit={handleSubmit}
         onChange={handleChange}
-        value={search}
-        reload={handleReload}
+        value={query}
+        removeSearch={handleRemoveSearch}
       />
 
       <CharactersList
@@ -87,7 +94,7 @@ const Home = () => {
       />
 
       {!loading && data.info.next && (
-        <button className='Main__MoreButton' onClick={handleClick}>
+        <button className='Main__MoreButton' onClick={handleMore}>
           More characters
         </button>
       )}

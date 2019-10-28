@@ -1,7 +1,7 @@
 {
   "name": "rick-and-morty-characters",
   "author": "Iair Poloniecki <iairpoloniecki@tuta.io> (https://github.com/iairpolo/)",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.11.0",
@@ -30,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.2.0"
   }
 }
