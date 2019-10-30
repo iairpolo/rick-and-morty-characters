@@ -4,4 +4,4 @@ Proyecto personal con la API de Rick and Morty.
 Se puede ver en: https://rickandmorty-characters.netlify.com/
 
 Personal Project with Rick and Morty's API.
-You can see in this link: https://rickandmorty-characters.netlify.com/
+You can see it in this link: https://rickandmorty-characters.netlify.com/
